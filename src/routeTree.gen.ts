@@ -10,11 +10,41 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CafeTorrefieVracRouteImport } from './routes/cafe-torrefie-vrac'
+import { Route as CafeVertRouteImport } from './routes/cafe-vert'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as MarqueBlancheRouteImport } from './routes/marque-blanche'
+import { Route as NotreUsineRouteImport } from './routes/notre-usine'
 import { Route as ApiPublicChatRouteImport } from './routes/api/public/chat'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CafeTorrefieVracRoute = CafeTorrefieVracRouteImport.update({
+  id: '/cafe-torrefie-vrac',
+  path: '/cafe-torrefie-vrac',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CafeVertRoute = CafeVertRouteImport.update({
+  id: '/cafe-vert',
+  path: '/cafe-vert',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MarqueBlancheRoute = MarqueBlancheRouteImport.update({
+  id: '/marque-blanche',
+  path: '/marque-blanche',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NotreUsineRoute = NotreUsineRouteImport.update({
+  id: '/notre-usine',
+  path: '/notre-usine',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiPublicChatRoute = ApiPublicChatRouteImport.update({
@@ -25,27 +55,69 @@ const ApiPublicChatRoute = ApiPublicChatRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/cafe-torrefie-vrac': typeof CafeTorrefieVracRoute
+  '/cafe-vert': typeof CafeVertRoute
+  '/contact': typeof ContactRoute
+  '/marque-blanche': typeof MarqueBlancheRoute
+  '/notre-usine': typeof NotreUsineRoute
   '/api/public/chat': typeof ApiPublicChatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/cafe-torrefie-vrac': typeof CafeTorrefieVracRoute
+  '/cafe-vert': typeof CafeVertRoute
+  '/contact': typeof ContactRoute
+  '/marque-blanche': typeof MarqueBlancheRoute
+  '/notre-usine': typeof NotreUsineRoute
   '/api/public/chat': typeof ApiPublicChatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/cafe-torrefie-vrac': typeof CafeTorrefieVracRoute
+  '/cafe-vert': typeof CafeVertRoute
+  '/contact': typeof ContactRoute
+  '/marque-blanche': typeof MarqueBlancheRoute
+  '/notre-usine': typeof NotreUsineRoute
   '/api/public/chat': typeof ApiPublicChatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/api/public/chat'
+  fullPaths:
+    | '/'
+    | '/cafe-torrefie-vrac'
+    | '/cafe-vert'
+    | '/contact'
+    | '/marque-blanche'
+    | '/notre-usine'
+    | '/api/public/chat'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/api/public/chat'
-  id: '__root__' | '/' | '/api/public/chat'
+  to:
+    | '/'
+    | '/cafe-torrefie-vrac'
+    | '/cafe-vert'
+    | '/contact'
+    | '/marque-blanche'
+    | '/notre-usine'
+    | '/api/public/chat'
+  id:
+    | '__root__'
+    | '/'
+    | '/cafe-torrefie-vrac'
+    | '/cafe-vert'
+    | '/contact'
+    | '/marque-blanche'
+    | '/notre-usine'
+    | '/api/public/chat'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CafeTorrefieVracRoute: typeof CafeTorrefieVracRoute
+  CafeVertRoute: typeof CafeVertRoute
+  ContactRoute: typeof ContactRoute
+  MarqueBlancheRoute: typeof MarqueBlancheRoute
+  NotreUsineRoute: typeof NotreUsineRoute
   ApiPublicChatRoute: typeof ApiPublicChatRoute
 }
 
@@ -56,6 +128,41 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cafe-torrefie-vrac': {
+      id: '/cafe-torrefie-vrac'
+      path: '/cafe-torrefie-vrac'
+      fullPath: '/cafe-torrefie-vrac'
+      preLoaderRoute: typeof CafeTorrefieVracRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cafe-vert': {
+      id: '/cafe-vert'
+      path: '/cafe-vert'
+      fullPath: '/cafe-vert'
+      preLoaderRoute: typeof CafeVertRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/marque-blanche': {
+      id: '/marque-blanche'
+      path: '/marque-blanche'
+      fullPath: '/marque-blanche'
+      preLoaderRoute: typeof MarqueBlancheRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/notre-usine': {
+      id: '/notre-usine'
+      path: '/notre-usine'
+      fullPath: '/notre-usine'
+      preLoaderRoute: typeof NotreUsineRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/public/chat': {
@@ -70,6 +177,11 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CafeTorrefieVracRoute: CafeTorrefieVracRoute,
+  CafeVertRoute: CafeVertRoute,
+  ContactRoute: ContactRoute,
+  MarqueBlancheRoute: MarqueBlancheRoute,
+  NotreUsineRoute: NotreUsineRoute,
   ApiPublicChatRoute: ApiPublicChatRoute,
 }
 export const routeTree = rootRouteImport
