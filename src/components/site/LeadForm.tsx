@@ -8,7 +8,7 @@ import { BrandButton } from "./BrandButton";
 
 const field = "h-12 w-full rounded-xl border border-mist bg-background px-4 text-[15px] text-foreground placeholder:text-ash outline-none transition focus:border-flame focus:ring-4 focus:ring-flame/15";
 
-function Field({ label, name, error, children }: { label: string; name: string; error?: string; children: React.ReactNode }) {
+function Field({ label, name, error, children }: { label: string; name: string; error?: string | undefined; children: React.ReactNode }) {
   return (
     <label htmlFor={name} className="block">
       <span className="mb-1.5 block text-sm font-medium text-plum">{label}</span>
@@ -61,11 +61,11 @@ export function LeadForm({ defaultType = "Dégustation" }: { defaultType?: (type
                 </select>
               </Field>
             </div>
-            <Field label="Nom *" name="nom" error={errors.nom}><input id="nom" name="nom" autoComplete="name" className={field} /></Field>
+            <Field label="Nom *" name="nom" error={errors["nom"]}><input id="nom" name="nom" autoComplete="name" className={field} /></Field>
             <Field label="Société" name="societe"><input id="societe" name="societe" autoComplete="organization" className={field} /></Field>
             <Field label="Ville" name="ville"><input id="ville" name="ville" className={field} /></Field>
-            <Field label="Téléphone" name="telephone" error={errors.telephone}><input id="telephone" name="telephone" type="tel" autoComplete="tel" className={field} /></Field>
-            <Field label="Email" name="email" error={errors.email}><input id="email" name="email" type="email" autoComplete="email" className={field} /></Field>
+            <Field label="Téléphone" name="telephone" error={errors["telephone"]}><input id="telephone" name="telephone" type="tel" autoComplete="tel" className={field} /></Field>
+            <Field label="Email" name="email" error={errors["email"]}><input id="email" name="email" type="email" autoComplete="email" className={field} /></Field>
             <Field label="Volume mensuel estimé" name="volume_mensuel"><input id="volume_mensuel" name="volume_mensuel" placeholder="ex. en kg / mois" className={field} /></Field>
             <div className="md:col-span-2">
               <Field label="Message" name="message">
