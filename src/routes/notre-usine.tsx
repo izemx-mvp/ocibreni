@@ -3,7 +3,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, Navigation } from "lucide-react";
 import { useState } from "react";
 import { BrandButton } from "@/components/site/BrandButton";
-import { MapEmbed } from "@/components/site/MapEmbed";
+import { DIRECTIONS_URL, MapEmbed } from "@/components/site/MapEmbed";
 import { SmartImage } from "@/components/site/SmartImage";
 import { Swirl } from "@/components/site/Swirl";
 import { site } from "@/config/site";
@@ -240,7 +240,7 @@ function FloorPlan({ active, onSelect }: { active: number; onSelect: (i: number)
                 {i + 1}
               </text>
               <text x={r.x + 34} y={r.y + 26} fill="#5A1D48" fillOpacity={isActive ? 1 : 0.6} fontSize="13" fontFamily="Inter, sans-serif">
-                {zones[i]?.name}
+                {zones[i].name}
               </text>
             </g>
           );
@@ -283,7 +283,7 @@ function FloorPlan({ active, onSelect }: { active: number; onSelect: (i: number)
           strokeLinecap="round"
           strokeLinejoin="round"
           initial={false}
-          animate={{ pathLength: routeProgress[active] ?? 0 }}
+          animate={{ pathLength: routeProgress[active] }}
           transition={{ duration: 0.8, ease }}
         />
         <motion.circle
@@ -292,7 +292,7 @@ function FloorPlan({ active, onSelect }: { active: number; onSelect: (i: number)
           stroke="#FBF8F4"
           strokeWidth="3"
           initial={false}
-          animate={{ cx: active === 3 ? 30 : (dot?.cx ?? 30), cy: dot?.cy ?? 0 }}
+          animate={{ cx: active === 3 ? 30 : dot.cx, cy: dot.cy }}
           transition={{ duration: 0.8, ease }}
         />
       </svg>
@@ -352,8 +352,6 @@ function Commitments() {
 /* 4 — Venir nous voir                                                 */
 /* ------------------------------------------------------------------ */
 function Visit() {
-  const directions = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(site.address)}`;
-
   return (
     <section className="noise relative overflow-hidden bg-dusk py-24 md:py-32">
       <div className="container-site grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
@@ -373,7 +371,7 @@ function Visit() {
               Prendre rendez-vous
             </BrandButton>
             <a
-              href={directions}
+              href={DIRECTIONS_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 font-medium text-on-dark underline decoration-on-dark/30 underline-offset-[6px] hover:decoration-[#F4522B]"

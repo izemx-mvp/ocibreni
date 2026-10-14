@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, Navigation } from "lucide-react";
 import { LeadForm } from "@/components/site/LeadForm";
-import { MapEmbed } from "@/components/site/MapEmbed";
+import { DIRECTIONS_URL, MapEmbed } from "@/components/site/MapEmbed";
 import { Swirl } from "@/components/site/Swirl";
 import { contactTypes, site, whatsappLink, type ContactType } from "@/config/site";
 import type { leadTypes } from "@/lib/lead-schema";
@@ -291,8 +291,6 @@ function QuickAnswers() {
 /* 5 — Nous trouver                                                    */
 /* ------------------------------------------------------------------ */
 function FindUs() {
-  const directions = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(site.address)}`;
-
   return (
     <section className="noise relative overflow-hidden bg-dusk py-24 md:py-28">
       <div className="container-site grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
@@ -311,7 +309,7 @@ function FindUs() {
             ))}
           </dl>
           <a
-            href={directions}
+            href={DIRECTIONS_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="mt-8 inline-flex items-center gap-2 font-medium text-on-dark underline decoration-on-dark/30 underline-offset-[6px] hover:decoration-[#F4522B]"

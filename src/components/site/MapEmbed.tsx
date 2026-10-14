@@ -2,6 +2,13 @@ import { useState } from "react";
 import { site } from "@/config/site";
 import { cn } from "@/lib/utils";
 
+/** Fiche Google Maps officielle de l'usine (Ocibreni Coffee Roasters, Tit Mellil). */
+export const MAP_EMBED_URL =
+  "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3326.000894492496!2d-7.49262012430587!3d33.52736237335911!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda635bf8d3cf4bb%3A0x3f673d7e949f674d!2sOcibreni%20Coffee%20Roasters%E2%80%93%20Torr%C3%A9faction%20%26%20Marque%20Blanche%20de%20Caf%C3%A9%20au%20Maroc%20%7C%20Import%2C%20Conditionnement%20%26%20Distribution!5e0!3m2!1sfr!2sma!4v1791990318863!5m2!1sfr!2sma";
+
+/** Lien d'itinéraire vers l'usine, utilisé partout sur le site. */
+export const DIRECTIONS_URL = "https://maps.app.goo.gl/SV1zAq8SKXqzEA1x5";
+
 /**
  * Carte Google Maps (sans clé API) pour l'adresse de l'usine dans site.ts.
  * La carte est désaturée et teintée pour s'accorder à la charte ; elle reprend ses couleurs
@@ -9,8 +16,6 @@ import { cn } from "@/lib/utils";
  */
 export function MapEmbed({ className }: { className?: string }) {
   const [active, setActive] = useState(false);
-  const q = encodeURIComponent(`${site.address}, Maroc`);
-  const directions = `https://www.google.com/maps/dir/?api=1&destination=${q}`;
 
   return (
     <div
@@ -19,9 +24,10 @@ export function MapEmbed({ className }: { className?: string }) {
     >
       <iframe
         title={`Plan d’accès — ${site.name}, ${site.city}`}
-        src={`https://maps.google.com/maps?q=${q}&z=14&output=embed`}
+        src={MAP_EMBED_URL}
+        allowFullScreen
         loading="lazy"
-        referrerPolicy="no-referrer-when-downgrade"
+        referrerPolicy="strict-origin-when-cross-origin"
         onFocus={() => setActive(true)}
         className={cn(
           "absolute inset-0 h-full w-full border-0 transition-[filter] duration-700",
@@ -47,7 +53,7 @@ export function MapEmbed({ className }: { className?: string }) {
           </span>
           <span className="min-w-0 truncate text-sm font-medium text-plum">{site.name}, {site.city}</span>
           <a
-            href={directions}
+            href={DIRECTIONS_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="shrink-0 text-sm font-semibold text-[#E8202E] underline-offset-4 hover:underline"
