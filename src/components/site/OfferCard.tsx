@@ -1,45 +1,65 @@
 import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
+import { FlameBorder } from "./LiftCard";
+import { SmartImage } from "./SmartImage";
 
 export function OfferCard({
   title,
   text,
   to,
-  icon,
-  highlighted,
+  image,
+  imageSubject,
+  audience,
+  featured,
   badge,
+  className,
 }: {
   title: string;
   text: string;
   to: string;
-  icon: ReactNode;
-  highlighted?: boolean;
+  image: string;
+  imageSubject: string;
+  audience: string;
+  featured?: boolean;
   badge?: string;
+  className?: string;
 }) {
   return (
-    <motion.div whileHover={{ y: -6 }} transition={{ type: "spring", stiffness: 300, damping: 22 }} className="h-full">
+    <motion.div whileHover={{ y: -6 }} transition={{ type: "spring", stiffness: 300, damping: 22 }} className={cn("h-full", className)}>
       <Link
         to={to}
         className={cn(
-          "group relative flex h-full flex-col overflow-hidden rounded-xl p-7 transition-shadow md:p-8",
-          highlighted ? "bg-dusk text-on-dark shadow-lift" : "bg-card shadow-soft hover:shadow-lift",
+          "group relative flex h-full flex-col overflow-hidden rounded-xl border transition-shadow",
+          featured ? "noise border-on-dark/10 bg-dusk text-on-dark shadow-lift lg:flex-row" : "border-mist bg-card shadow-soft hover:shadow-lift",
         )}
       >
-        {badge && (
-          <span className="absolute right-6 top-6 rounded-full bg-flame-gradient px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-primary-foreground">
-            {badge}
+        <FlameBorder />
+        <SmartImage
+          src={image}
+          alt={title}
+          subject={imageSubject}
+          className={cn("aspect-[4/3] w-full shrink-0", featured && "lg:aspect-auto lg:min-h-[420px] lg:w-[52%]")}
+          imgClassName="transition-transform duration-700 group-hover:scale-[1.04]"
+        />
+        <div className={cn("flex flex-1 flex-col p-7 md:p-8", featured && "lg:p-12")}>
+          {badge && (
+            <span className="mb-5 self-start rounded-full bg-flame-gradient px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-primary-foreground">
+              {badge}
+            </span>
+          )}
+          <h3 className={cn("font-semibold", featured ? "text-2xl text-on-dark md:text-4xl" : "text-xl")}>{title}</h3>
+          <p className={cn("mt-3 leading-relaxed", featured ? "text-on-dark-muted md:text-lg" : "text-muted-foreground")}>{text}</p>
+          <p className={cn("mt-5 text-sm", featured ? "text-on-dark-muted" : "text-muted-foreground")}>
+            <span className={cn("eyebrow mr-2", featured ? "text-flame" : "text-flame-deep")}>Pour</span>
+            {audience}
+          </p>
+          <span className={cn("mt-auto inline-flex items-center gap-1.5 pt-8 text-sm font-semibold", featured ? "text-on-dark" : "text-flame-deep")}>
+            Découvrir
+            <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
           </span>
-        )}
-        <div className={cn("mb-8 grid size-14 place-items-center rounded-2xl", highlighted ? "bg-on-dark/10" : "bg-sand")}>{icon}</div>
-        <h3 className={cn("text-xl font-semibold", highlighted && "text-on-dark")}>{title}</h3>
-        <p className={cn("mt-3 flex-1 leading-relaxed", highlighted ? "text-on-dark-muted" : "text-muted-foreground")}>{text}</p>
-        <span className={cn("mt-8 inline-flex items-center gap-1.5 text-sm font-semibold", highlighted ? "text-on-dark" : "text-flame-deep")}>
-          Découvrir
-          <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-        </span>
+        </div>
       </Link>
     </motion.div>
   );
