@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { fadeUp } from "./Reveal";
 
-export function ProcessStep({ index, title, text, last }: { index: number; title: string; text?: string; last?: boolean }) {
+export function ProcessStep({ index, title, text, last }: { index: number; title: string; text?: string | undefined; last?: boolean }) {
   return (
     <motion.li variants={fadeUp} className="relative flex gap-5 pb-10 last:pb-0">
       {!last && <span aria-hidden className="absolute left-[23px] top-14 bottom-0 w-px bg-gradient-to-b from-flame/60 to-mist" />}

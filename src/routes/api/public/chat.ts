@@ -22,7 +22,7 @@ export const Route = createFileRoute("/api/public/chat")({
       POST: async ({ request }) => {
         const parsed = bodySchema.safeParse(await request.json().catch(() => null));
         if (!parsed.success) return Response.json({ error: "Requête invalide" }, { status: 400 });
-        const apiKey = process.env.LOVABLE_API_KEY;
+        const apiKey = process.env["LOVABLE_API_KEY"];
         if (!apiKey) return Response.json({ error: "Assistant indisponible" }, { status: 500 });
 
         const lovable = createOpenAICompatible({
